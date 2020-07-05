@@ -1,0 +1,47 @@
+{% extends 'portfolio/base.html' %}
+
+{% block content %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<div class="container text-center">
+
+  <h1>PARUL'S PORTFOLIO</h1>
+
+    {% load static %}
+
+    <a href="{% url 'blog:all_blogs' %}"><h2 class="alert alert-success">Blog</h2></a>
+    <br>
+
+    <div class="row justify-content-center my-3">
+        <div class="col-5">
+
+          <img  id = 'prof'class='img-rounded 'style='vertical-align: middle;
+
+      height:300px;
+
+      width:300px;
+
+      border-radius: 50%;'src = "{% static 'portfolio/paro.jpg' %}" >
+       </div>
+   </div>
+
+   <h2 class="mt-5">Portfolio</h2>
+      <hr>
+      <div class="row">
+        {% for project in projects %}
+         <div class="col-lg-4 col-md-6">
+           {% if project.url %}
+          <a href="{{ project.url }}">
+            <img src="{{ project.image.url }}" class="img-fluid mb-2">
+          </a>
+          {% else %}
+
+          <img src="{{ project.image.url }}" class="img-fluid mb-2">
+          {% endif %}
+          <h3>{{ project.title }}</h3>
+          <p>{{ project.description }}</p>
+
+        </div>
+        {% endfor %}
+      </div>
+
+      {% endblock %}
